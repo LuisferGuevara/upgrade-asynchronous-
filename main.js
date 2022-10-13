@@ -26,6 +26,24 @@ button$$.addEventListener('click', () => search());
 // EJ: El nombre Pepe tiene un 22 porciento de ser de ET y un 6 porciento de ser 
 // de MZ.
 
+function search(){
+    fetch(`${baseUrl}/?name=${input$$.value}`)
+    .then((data) => data.json())
+    .then((person) => createText(person));
+}
+function createText(person){
+    const p$$ = document.createElement('p');
+    let text = `El nombre ${person.name} `;
+
+    for (const country of person.country) {
+        text +=  `tiene un por ${country.probability * 100} porciento  de ser ${country.country_id} `
+    }
+
+    p$$.textContent = text;
+    document.body.appendChild(p$$);
+
+}
+
 // 2.4 En base al ejercicio anterior, crea un botón con el texto 'X' para cada uno 
 // de los p que hayas insertado y que si el usuario hace click en este botón 
 // eliminemos el parrafo asociado.
