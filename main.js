@@ -3,12 +3,23 @@
 // hacer un .fetch() y recibir los datos que devuelve. Imprimelo mediante un 
 // console.log(). Para ello, es necesario que crees un .html y un .js.
 fetch('https://api.agify.io?name=michael')
-.then((esto) => esto.json())
-.then((esto) => console.log(esto));
+.then((data) => data.json())
+.then((data) => console.log(data));
 
 // 2.1 Dado el siguiente javascript y html. Añade la funcionalidad necesaria usando 
 // fetch() para hacer una consulta a la api cuando se haga click en el botón, 
 // pasando como parametro de la api, el valor del input.
+function search(){
+    fetch(`${baseUrl}/?name=${input$$.value}`)
+    .then((data) => data.json())
+    .then((data) => console.log(data));
+}
+
+const baseUrl = 'https://api.nationalize.io';
+const input$$ = document.querySelector('input');
+const button$$ = document.querySelector('button');
+button$$.addEventListener('click', () => search());
+
 
 // 2.3 En base al ejercicio anterior. Crea dinamicamente un elemento  por cada petición 
 // a la api que diga...'El nombre X tiene un Y porciento de ser de Z' etc etc.
@@ -20,10 +31,3 @@ fetch('https://api.agify.io?name=michael')
 // eliminemos el parrafo asociado.
 
 
-
-const baseUrl = 'https://api.nationalize.io';
-
-
-
-const input$$ = document.querySelector('input');
-input$$.addEventListener('input',)
