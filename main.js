@@ -50,3 +50,34 @@ button$$.addEventListener('click', () => search2());
 // eliminemos el parrafo asociado.
 
 
+function search3(){
+    fetch(`${baseUrl}/?name=${input$$.value}`)
+    .then((data) => data.json())
+    .then((person) => createText(person));
+}
+function createText(person){
+    
+    const p$$ = document.createElement('p');
+    let text = `El nombre ${person.name} `;
+
+    for (const country of person.country) {
+        text +=  `tiene un por ${country.probability * 100} porciento  de ser ${country.country_id} `
+    }
+
+    p$$.textContent = text;
+    const button$$ = document.createElement('button');
+    button$$.textContent = 'X';
+    const div$$ = document.createElement('div');
+    div$$.appendChild(p$$);
+    div$$.appendChild(button$$)
+    document.body.appendChild(div$$)
+
+    function removeDiv(div$$){
+        const findP$$ = document.querySelector('div');
+        findP$$.remove()
+        
+    }
+
+    button$$.addEventListener('click', () => removeDiv())
+}
+
