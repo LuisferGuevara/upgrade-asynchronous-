@@ -26,7 +26,7 @@ button$$.addEventListener('click', () => search());
 // EJ: El nombre Pepe tiene un 22 porciento de ser de ET y un 6 porciento de ser 
 // de MZ.
 
-function search(){
+function search2(){
     fetch(`${baseUrl}/?name=${input$$.value}`)
     .then((data) => data.json())
     .then((person) => createText(person));
@@ -43,6 +43,7 @@ function createText(person){
     document.body.appendChild(p$$);
 
 }
+button$$.addEventListener('click', () => search2());
 
 // 2.4 En base al ejercicio anterior, crea un botón con el texto 'X' para cada uno 
 // de los p que hayas insertado y que si el usuario hace click en este botón 
