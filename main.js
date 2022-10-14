@@ -26,58 +26,89 @@ button$$.addEventListener('click', () => search());
 // EJ: El nombre Pepe tiene un 22 porciento de ser de ET y un 6 porciento de ser 
 // de MZ.
 
-function search2(){
-    fetch(`${baseUrl}/?name=${input$$.value}`)
-    .then((data) => data.json())
-    .then((person) => createText(person));
-}
-function createText(person){
-    const p$$ = document.createElement('p');
-    let text = `El nombre ${person.name} `;
+// function search2(){
+//     fetch(`${baseUrl}/?name=${input$$.value}`)
+//     .then((data) => data.json())
+//     .then((person) => createText(person));
+// }
+// function createText(person){
+//     const p$$ = document.createElement('p');
+//     let text = `El nombre ${person.name} `;
 
-    for (const country of person.country) {
-        text +=  `tiene un por ${country.probability * 100} porciento  de ser ${country.country_id} `
-    }
+//     for (const country of person.country) {
+//         text +=  `tiene un porciento  ${country.probability * 100} porciento  de ser ${country.country_id} `
+//     }
 
-    p$$.textContent = text;
-    document.body.appendChild(p$$);
+//     p$$.textContent = text;
+//     document.body.appendChild(p$$);
 
-}
-button$$.addEventListener('click', () => search2());
+// }
+// button$$.addEventListener('click', () => search2());
 
 // 2.4 En base al ejercicio anterior, crea un botón con el texto 'X' para cada uno 
 // de los p que hayas insertado y que si el usuario hace click en este botón 
 // eliminemos el parrafo asociado.
 
+// Opcion 1
+// function search3(){
+//     fetch(`${baseUrl}/?name=${input$$.value}`)
+//     .then((data) => data.json())
+//     .then((person) => createText(person));
+// }
+// function createText(person){
+    
+//     const p$$ = document.createElement('p');
+//     let text = `El nombre ${person.name} `;
 
-function search3(){
+//     for (const country of person.country) {
+//         text +=  ` tiene un ${country.probability * 100} porciento  de ser de ${country.country_id} `
+//     }
+
+//     p$$.textContent = text;
+//     const button$$ = document.createElement('button');
+//     button$$.textContent = 'X';
+//     const div$$ = document.createElement('div');
+//     div$$.appendChild(p$$);
+//     div$$.appendChild(button$$)
+//     document.body.appendChild(div$$)
+
+//     function removeDiv(div$$){
+//         const findP$$ = document.querySelector('div');
+//         findP$$.remove()
+        
+//     }
+
+//     button$$.addEventListener('click', () => removeDiv())
+// }
+
+//Opcion 2
+function search4(){
     fetch(`${baseUrl}/?name=${input$$.value}`)
     .then((data) => data.json())
     .then((person) => createText(person));
 }
+
+const eliminar = (elementos) => {
+    for (const elemento of elementos) {
+        elemento.remove()
+        
+    }
+}
 function createText(person){
-    
     const p$$ = document.createElement('p');
+    const button2$$ = document.createElement('button');
+    button2$$.textContent = 'X';
+
     let text = `El nombre ${person.name} `;
 
     for (const country of person.country) {
-        text +=  `tiene un por ${country.probability * 100} porciento  de ser ${country.country_id} `
+        text +=  `tiene un porciento  ${country.probability * 100} porciento  de ser ${country.country_id} `
     }
 
+    button2$$.addEventListener('click', () => eliminar([p$$,button2$$]));
     p$$.textContent = text;
-    const button$$ = document.createElement('button');
-    button$$.textContent = 'X';
-    const div$$ = document.createElement('div');
-    div$$.appendChild(p$$);
-    div$$.appendChild(button$$)
-    document.body.appendChild(div$$)
+    document.body.appendChild(p$$);
+    document.body.appendChild(button2$$);
 
-    function removeDiv(div$$){
-        const findP$$ = document.querySelector('div');
-        findP$$.remove()
-        
-    }
-
-    button$$.addEventListener('click', () => removeDiv())
 }
-
+button$$.addEventListener('click', () => search4());
